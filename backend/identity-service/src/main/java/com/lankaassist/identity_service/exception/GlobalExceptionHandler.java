@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.jwt.JwtEncodingException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -58,6 +59,26 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(body);
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+public ResponseEntity<Map<String, Object>> handleInvalidCredentials(
+        InvalidCredentialsException exception) {
+
+    return createResponse(
+            HttpStatus.UNAUTHORIZED,
+            exception.getMessage()
+    );
+}
+
+@ExceptionHandler(JwtEncodingException.class)
+public ResponseEntity<Map<String, Object>> handleJwtEncoding(
+        JwtEncodingException exception) {
+
+    return createResponse(
+            HttpStatus.INTERNAL_SERVER_ERROR,
+            "Unable to create authentication token"
+    );
+}
 
     private ResponseEntity<Map<String, Object>> createResponse(
             HttpStatus status,

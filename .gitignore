@@ -1,0 +1,22 @@
+# Java build files
+target/
+*.class
+
+# Frontend dependencies
+node_modules/
+dist/
+
+# Passwords and environment variables
+.env
+*.env
+
+# IntelliJ files
+.idea/
+*.iml
+
+# Log files
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db

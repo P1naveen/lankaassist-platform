@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: identity-service
+              uri: "${IDENTITY_SERVICE_URL:http://localhost:8081}"
+              predicates:
+                - Path=/api/auth/**
+
+            - id: assistance-service
+              uri: "${ASSISTANCE_SERVICE_URL:http://localhost:8086}"
+              predicates:
+                - Path=/api/assistance/**
+
+            - id: contribution-service
+              uri: "${CONTRIBUTION_SERVICE_URL:http://localhost:8083}"
+              predicates:
+                - Path=/api/contributions/**
+
+            - id: coordination-service
+              uri: "${COORDINATION_SERVICE_URL:http://localhost:8084}"
+              predicates:
+                - Path=/api/allocations/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+  endpoint:
+    health:
+      show-details: always
+      

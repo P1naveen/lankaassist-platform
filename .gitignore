@@ -20,3 +20,6 @@ dist/
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Postman local environments may contain tokens
+postman/*.postman_environment.json

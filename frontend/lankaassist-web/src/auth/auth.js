@@ -21,7 +21,10 @@ export function getToken() {
 
 export function getCurrentUser() {
   const storedUser = sessionStorage.getItem("user");
-  return storedUser ? JSON.parse(storedUser) : null;
+
+  return storedUser
+    ? JSON.parse(storedUser)
+    : null;
 }
 
 export function isAuthenticated() {

@@ -1,4 +1,9 @@
-import { NavLink, useNavigate } from "react-router";
+import {
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router";
+
 import {
   getCurrentUser,
   isAuthenticated,
@@ -6,6 +11,8 @@ import {
 } from "../auth/auth";
 
 export default function Header() {
+  useLocation();
+
   const navigate = useNavigate();
   const loggedIn = isAuthenticated();
   const user = getCurrentUser();
@@ -19,29 +26,60 @@ export default function Header() {
     <header className="site-header">
       <div className="header-content">
         <NavLink to="/" className="brand">
-          LankaAssist
+          <span className="brand-mark">LA</span>
+
+          <span>
+            LankaAssist
+            <small>Relief coordination</small>
+          </span>
         </NavLink>
 
-        <nav className="navigation">
-          <NavLink to="/">Home</NavLink>
+        <nav
+          className="navigation"
+          aria-label="Main navigation"
+        >
+          <NavLink
+            to="/"
+            className="nav-link"
+          >
+            Home
+          </NavLink>
 
           {!loggedIn && (
             <>
-              <NavLink to="/login">
+              <NavLink
+                to="/login"
+                className="nav-link"
+              >
                 Login
               </NavLink>
 
-              <NavLink to="/register">
-                Register
+              <NavLink
+                to="/register"
+                className="button header-button"
+              >
+                Create account
               </NavLink>
             </>
           )}
 
           {loggedIn && (
             <>
-              <NavLink to="/dashboard">
+              <NavLink
+                to="/dashboard"
+                className="nav-link"
+              >
                 Dashboard
               </NavLink>
+
+              {user?.role === "APPLICANT" && (
+                <NavLink
+                  to="/assistance/new"
+                  className="nav-link"
+                >
+                  Request help
+                </NavLink>
+              )}
 
               <span className="user-role">
                 {user?.role}
@@ -61,4 +99,3 @@ export default function Header() {
     </header>
   );
 }
-

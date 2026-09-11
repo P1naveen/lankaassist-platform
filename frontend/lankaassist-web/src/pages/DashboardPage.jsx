@@ -86,6 +86,12 @@ export default function DashboardPage() {
               Browse eligible requests and make a
               financial or physical contribution.
             </p>
+            <Link
+    to="/requests"
+    className="button light-button"
+  >
+    Browse requests
+  </Link>
           </article>
 
           <article className="action-card">

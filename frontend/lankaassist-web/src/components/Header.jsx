@@ -89,6 +89,14 @@ export default function Header() {
     </NavLink>
   </>
 )}
+{user?.role === "DONOR" && (
+  <NavLink
+    to="/requests"
+    className="nav-link"
+  >
+    Browse requests
+  </NavLink>
+)}
               <span className="user-role">
                 {user?.role}
               </span>

@@ -7,6 +7,8 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import AssistanceRequestPage from "./pages/AssistanceRequestPage";
 import MyRequestsPage from "./pages/MyRequestsPage";
+import BrowseRequestsPage from "./pages/BrowseRequestsPage";
+import CreateContributionPage from "./pages/CreateContributionPage";
 
 export default function App() {
   return (
@@ -51,6 +53,23 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/requests"
+  element={
+    <ProtectedRoute>
+      <BrowseRequestsPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/contributions/new/:requestId"
+  element={
+    <ProtectedRoute>
+      <CreateContributionPage />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
 
       <footer className="site-footer">

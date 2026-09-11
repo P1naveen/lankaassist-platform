@@ -27,5 +27,6 @@ public record CreateContributionRequest(
         @NotBlank(message = "Description is required")
         @Size(min = 5, max = 500)
         String description
+        
 ) {
 }

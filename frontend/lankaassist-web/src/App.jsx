@@ -9,6 +9,7 @@ import AssistanceRequestPage from "./pages/AssistanceRequestPage";
 import MyRequestsPage from "./pages/MyRequestsPage";
 import BrowseRequestsPage from "./pages/BrowseRequestsPage";
 import CreateContributionPage from "./pages/CreateContributionPage";
+import MyContributionsPage from "./pages/MyContributionsPage";
 
 export default function App() {
   return (
@@ -41,6 +42,14 @@ export default function App() {
   element={
     <ProtectedRoute>
       <MyRequestsPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/contributions/my"
+  element={
+    <ProtectedRoute>
+      <MyContributionsPage />
     </ProtectedRoute>
   }
 />

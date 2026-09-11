@@ -74,34 +74,48 @@ export default function DashboardPage() {
       )}
 
       {user?.role === "DONOR" && (
-        <section className="dashboard-grid">
-          <article className="action-card primary-action">
-            <span className="action-label">
-              Donor account
-            </span>
+  <section className="dashboard-grid">
+    <article className="action-card primary-action">
+      <span className="action-label">
+        Donor account
+      </span>
 
-            <h2>Find requests to support</h2>
+      <h2>Find requests to support</h2>
 
-            <p>
-              Browse eligible requests and make a
-              financial or physical contribution.
-            </p>
-          </article>
+      <p>
+        Browse assistance requests and provide money,
+        goods or physical help.
+      </p>
 
-          <article className="action-card">
-            <h2>Privacy preference</h2>
+      <Link
+        to="/requests"
+        className="button light-button"
+      >
+        Browse requests
+      </Link>
+    </article>
 
-            <p>
-              Anonymous donor status:{" "}
-              <strong>
-                {user?.anonymousDonor
-                  ? "Enabled"
-                  : "Disabled"}
-              </strong>
-            </p>
-          </article>
-        </section>
-      )}
+    <article className="action-card">
+      <span className="card-number">
+        02
+      </span>
+
+      <h2>My contributions</h2>
+
+      <p>
+        Review your submitted contributions and their
+        current statuses.
+      </p>
+
+      <Link
+        to="/contributions/my"
+        className="button ghost-button"
+      >
+        View contributions
+      </Link>
+    </article>
+  </section>
+)}
 
       {user?.role === "VOLUNTEER" && (
         <section className="dashboard-grid">

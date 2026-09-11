@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import AssistanceRequestPage from "./pages/AssistanceRequestPage";
+import MyRequestsPage from "./pages/MyRequestsPage";
 
 export default function App() {
   return (
@@ -33,6 +34,14 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/assistance/mine"
+  element={
+    <ProtectedRoute>
+      <MyRequestsPage />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/assistance/new"

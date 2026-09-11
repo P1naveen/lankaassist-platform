@@ -54,13 +54,22 @@ export default function DashboardPage() {
           </article>
 
           <article className="action-card">
-            <span className="card-number">02</span>
-            <h2>Track requests</h2>
-            <p>
-              Request tracking will be added in the
-              next frontend checkpoint.
-            </p>
-          </article>
+  <span className="card-number">02</span>
+
+  <h2>Track requests</h2>
+
+  <p>
+    View submitted requests and follow their
+    current approval status.
+  </p>
+
+  <Link
+    to="/assistance/mine"
+    className="button ghost-button"
+  >
+    View my requests
+  </Link>
+</article>
         </section>
       )}
 

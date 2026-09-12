@@ -1,0 +1,111 @@
+name: lankaassist-platform
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: lankaassist-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${LANKAASSIST_PG_PASSWORD}
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      -  postgres_data:/var/lib/postgresql
+      - ./docker/postgres/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d postgres"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  identity-service:
+    image: lankaassist/identity-service:1.0
+    container_name: lankaassist-identity
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lankaassist_identity
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${LANKAASSIST_PG_PASSWORD}
+      LANKAASSIST_JWT_SECRET: ${LANKAASSIST_JWT_SECRET}
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  assistance-service:
+    image: lankaassist/assistance-service:1.0
+    container_name: lankaassist-assistance
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lankaassist_assistance
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${LANKAASSIST_PG_PASSWORD}
+      LANKAASSIST_JWT_SECRET: ${LANKAASSIST_JWT_SECRET}
+    ports:
+      - "8086:8086"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  contribution-service:
+    image: lankaassist/contribution-service:1.0
+    container_name: lankaassist-contribution
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lankaassist_contribution
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${LANKAASSIST_PG_PASSWORD}
+      LANKAASSIST_JWT_SECRET: ${LANKAASSIST_JWT_SECRET}
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  coordination-service:
+    image: lankaassist/coordination-service:1.0
+    container_name: lankaassist-coordination
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lankaassist_coordination
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${LANKAASSIST_PG_PASSWORD}
+      LANKAASSIST_JWT_SECRET: ${LANKAASSIST_JWT_SECRET}
+    ports:
+      - "8084:8084"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-gateway:
+    image: lankaassist/api-gateway:1.0
+    container_name: lankaassist-gateway
+    environment:
+      IDENTITY_SERVICE_URI: http://identity-service:8081
+      ASSISTANCE_SERVICE_URI: http://assistance-service:8086
+      CONTRIBUTION_SERVICE_URI: http://contribution-service:8083
+      COORDINATION_SERVICE_URI: http://coordination-service:8084
+    ports:
+      - "8080:8080"
+    depends_on:
+      - identity-service
+      - assistance-service
+      - contribution-service
+      - coordination-service
+
+  frontend:
+    image: lankaassist/frontend:1.0
+    container_name: lankaassist-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api-gateway
+
+volumes:
+  postgres_data:

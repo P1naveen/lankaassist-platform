@@ -25,25 +25,31 @@ export async function apiRequest(
     {
       method,
       headers,
-      body: body ? JSON.stringify(body) : null,
+      body:
+        body === null
+          ? undefined
+          : JSON.stringify(body),
     }
   );
 
-  const contentType =
-    response.headers.get("content-type");
+  const responseText = await response.text();
+  let data = null;
 
-  const data =
-    contentType?.includes("application/json")
-      ? await response.json()
-      : null;
+  if (responseText) {
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      data = responseText;
+    }
+  }
 
   if (!response.ok) {
     throw new Error(
       data?.message ||
-      `Request failed with status ${response.status}`
+        (typeof data === "string" ? data : null) ||
+        `Request failed with status ${response.status}`
     );
   }
 
   return data;
 }
-

@@ -67,8 +67,35 @@ export default function MyContributionsPage() {
   }
 
   useEffect(() => {
-    loadContributions();
-  }, []);
+    if (user?.role !== "DONOR") {
+      return undefined;
+    }
+
+    let ignore = false;
+
+    apiRequest("/contributions/mine")
+      .then((response) => {
+        if (!ignore) {
+          setContributions(
+            Array.isArray(response) ? response : []
+          );
+        }
+      })
+      .catch((requestError) => {
+        if (!ignore) {
+          setError(requestError.message);
+        }
+      })
+      .finally(() => {
+        if (!ignore) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [user?.role]);
 
   if (user?.role !== "DONOR") {
     return (

@@ -1017,7 +1017,7 @@ h3 {
   border: 4px solid #dcefe8;
   border-top-color: var(--emerald);
   border-radius: 50%;
-  animation: spin 700ms linear infinite;
+  ;
 }
 
 .retry-button {
@@ -1031,11 +1031,7 @@ h3 {
   text-decoration: underline;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 
 @media (max-width: 760px) {
   .requests-header {
@@ -1324,6 +1320,327 @@ h3 {
 
   .privacy-summary {
     align-items: flex-start;
+  }
+}
+.allocation-page {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 44px 0 72px;
+}
+
+.allocation-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 42px;
+  margin-bottom: 28px;
+  color: #f8fafc;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(16, 185, 129, 0.28),
+      transparent 38%
+    ),
+    linear-gradient(135deg, #071b33, #0f3150);
+  border-radius: 26px;
+  box-shadow: 0 24px 55px rgba(7, 27, 51, 0.2);
+}
+
+.allocation-hero h1 {
+  margin: 8px 0 12px;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: -0.04em;
+}
+
+.allocation-hero p {
+  max-width: 680px;
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.allocation-eyebrow {
+  margin: 0;
+  color: #34d399 !important;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.allocation-summary {
+  min-width: 165px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.allocation-summary span {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #6ee7b7;
+}
+
+.allocation-summary p {
+  font-size: 0.9rem;
+}
+
+.allocation-form-card,
+.allocation-list-section {
+  padding: 30px;
+  margin-bottom: 28px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
+}
+
+.allocation-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.allocation-section-heading h2 {
+  margin: 5px 0 0;
+  color: #0f172a;
+}
+
+.privacy-label {
+  padding: 8px 12px;
+  color: #047857;
+  background: #d1fae5;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.allocation-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.allocation-form label,
+.allocation-status-control {
+  display: grid;
+  gap: 8px;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.allocation-form input,
+.allocation-form textarea,
+.allocation-status-control select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font: inherit;
+  outline: none;
+}
+
+.allocation-form input:focus,
+.allocation-form textarea:focus,
+.allocation-status-control select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
+}
+
+.allocation-notes-field {
+  grid-column: 1 / -1;
+}
+
+.allocation-primary-button,
+.allocation-refresh-button {
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.allocation-primary-button {
+  width: fit-content;
+  padding: 13px 20px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #059669, #047857);
+}
+
+.allocation-refresh-button {
+  padding: 10px 16px;
+  color: #0f3150;
+  background: #e2e8f0;
+}
+
+.allocation-primary-button:disabled,
+.allocation-refresh-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.allocation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.allocation-card {
+  padding: 22px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+}
+
+.allocation-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.allocation-card h3 {
+  margin: 6px 0 0;
+  color: #0f172a;
+}
+
+.allocation-number {
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.allocation-status {
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.status-assigned {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.status-in_progress {
+  color: #b45309;
+  background: #fef3c7;
+}
+
+.status-delivered {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.status-cancelled {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.allocation-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 18px 0;
+}
+
+.allocation-details div {
+  padding: 13px;
+  background: #eef2f7;
+  border-radius: 12px;
+}
+
+.allocation-details span,
+.allocation-notes span {
+  display: block;
+  margin-bottom: 4px;
+  color: #64748b;
+  font-size: 0.76rem;
+}
+
+.allocation-details strong {
+  color: #0f172a;
+}
+
+.allocation-notes {
+  min-height: 76px;
+  padding: 14px;
+  margin-bottom: 16px;
+  background: #ffffff;
+  border-left: 3px solid #10b981;
+  border-radius: 8px;
+}
+
+.allocation-notes p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.allocation-message,
+.allocation-empty {
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+}
+
+.allocation-error {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.allocation-success {
+  color: #065f46;
+  background: #d1fae5;
+}
+
+.allocation-empty {
+  text-align: center;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+}
+
+@media (max-width: 760px) {
+  .allocation-page {
+    width: min(100% - 20px, 1180px);
+    padding-top: 24px;
+  }
+
+  .allocation-hero {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 28px;
+  }
+
+  .allocation-summary {
+    min-width: auto;
+  }
+
+  .allocation-form,
+  .allocation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .allocation-form-card,
+  .allocation-list-section {
+    padding: 20px;
+  }
+
+  .allocation-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

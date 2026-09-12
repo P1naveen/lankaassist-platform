@@ -1,0 +1,4 @@
+CREATE DATABASE lankaassist_identity;
+CREATE DATABASE lankaassist_assistance;
+CREATE DATABASE lankaassist_contribution;
+CREATE DATABASE lankaassist_coordination;

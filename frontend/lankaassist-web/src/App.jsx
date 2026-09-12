@@ -10,6 +10,7 @@ import MyRequestsPage from "./pages/MyRequestsPage";
 import BrowseRequestsPage from "./pages/BrowseRequestsPage";
 import CreateContributionPage from "./pages/CreateContributionPage";
 import MyContributionsPage from "./pages/MyContributionsPage";
+import AllocationsPage from "./pages/AllocationsPage";
 
 export default function App() {
   return (
@@ -70,6 +71,15 @@ export default function App() {
     </ProtectedRoute>
   }
 />
+<Route
+  path="/allocations"
+  element={
+    <ProtectedRoute>
+      <AllocationsPage />
+    </ProtectedRoute>
+  }
+/>
+
 
 <Route
   path="/contributions/new/:requestId"

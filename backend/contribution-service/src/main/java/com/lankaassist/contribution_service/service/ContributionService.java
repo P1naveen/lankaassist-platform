@@ -28,7 +28,6 @@ public class ContributionService {
     @Transactional
     public ContributionResponse create(
             Long donorId,
-            boolean anonymousDonor,
             CreateContributionRequest request) {
 
         if (request.contributionType()
@@ -47,7 +46,7 @@ public class ContributionService {
                 request.contributionType(),
                 request.amount(),
                 request.description().trim(),
-                anonymousDonor
+                request.anonymousDonor()
         );
 
         return ContributionResponse.from(

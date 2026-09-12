@@ -227,12 +227,28 @@ export default function AssistanceRequestPage() {
                   Financial assistance
                 </option>
 
-                <option value="GOODS">
-                  Goods and supplies
+                <option value="FOOD">
+                  Food
+                </option>
+
+                <option value="MEDICAL">
+                  Medical assistance
+                </option>
+
+                <option value="SHELTER">
+                  Shelter
+                </option>
+
+                <option value="EDUCATION">
+                  Education
                 </option>
 
                 <option value="PHYSICAL_HELP">
                   Physical assistance
+                </option>
+
+                <option value="OTHER">
+                  Other support
                 </option>
               </select>
             </div>

@@ -46,7 +46,6 @@ public class ContributionController {
                 .body(
                         contributionService.create(
                                 getUserId(jwt),
-                                getAnonymousDonor(jwt),
                                 request
                         )
                 );
@@ -102,11 +101,4 @@ public class ContributionController {
         return userId.longValue();
     }
 
-    private boolean getAnonymousDonor(Jwt jwt) {
-
-        Boolean anonymousDonor =
-                jwt.getClaim("anonymousDonor");
-
-        return Boolean.TRUE.equals(anonymousDonor);
-    }
 }

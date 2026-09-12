@@ -13,6 +13,7 @@ public record ContributionResponse(
         ContributionType contributionType,
         BigDecimal amount,
         String description,
+        boolean anonymousDonor,
         String donorLabel,
         ContributionStatus status,
         LocalDateTime createdAt
@@ -32,6 +33,7 @@ public record ContributionResponse(
                 contribution.getContributionType(),
                 contribution.getAmount(),
                 contribution.getDescription(),
+                contribution.isAnonymousDonor(),
                 donorLabel,
                 contribution.getStatus(),
                 contribution.getCreatedAt()

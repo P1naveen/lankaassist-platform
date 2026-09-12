@@ -23,3 +23,5 @@ Thumbs.db
 
 # Postman local environments may contain tokens
 postman/*.postman_environment.json
+
+.env

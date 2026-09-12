@@ -65,8 +65,35 @@ export default function MyRequestsPage() {
   }
 
   useEffect(() => {
-    loadRequests();
-  }, []);
+    if (user?.role !== "APPLICANT") {
+      return undefined;
+    }
+
+    let ignore = false;
+
+    apiRequest("/assistance/mine")
+      .then((response) => {
+        if (!ignore) {
+          setRequests(
+            Array.isArray(response) ? response : []
+          );
+        }
+      })
+      .catch((requestError) => {
+        if (!ignore) {
+          setError(requestError.message);
+        }
+      })
+      .finally(() => {
+        if (!ignore) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [user?.role]);
 
   if (user?.role !== "APPLICANT") {
     return (

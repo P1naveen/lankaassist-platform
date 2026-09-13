@@ -58,27 +58,28 @@ pipeline {
         }
 
         stage('Docker Login') {
-            steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'dockerhub-lankaassist-v2',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_TOKEN'
-                    )
-                ]) {
-                    bat '''
-                        @echo off
-                        echo %DOCKER_TOKEN% | docker login --username %DOCKER_USER% --password-stdin
-                    '''
-                }
-            }
+    steps {
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'dockerhub-lankaassist-v3',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_TOKEN'
+            )
+        ]) {
+            bat '''
+                @echo off
+                docker logout >nul 2>&1
+                powershell -NoProfile -NonInteractive -Command "$u=$env:DOCKER_USER.Trim(); $t=$env:DOCKER_TOKEN.Trim(); $t | docker login --username $u --password-stdin; exit $LASTEXITCODE"
+            '''
         }
+    }
+}
 
         stage('Build Docker Images') {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'dockerhub-lankaassist-v2',
+                        credentialsId: 'dockerhub-lankaassist-v3',
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_TOKEN'
                     )
@@ -100,7 +101,7 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'dockerhub-lankaassist-v2',
+                        credentialsId: 'dockerhub-lankaassist-v3',
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_TOKEN'
                     )
